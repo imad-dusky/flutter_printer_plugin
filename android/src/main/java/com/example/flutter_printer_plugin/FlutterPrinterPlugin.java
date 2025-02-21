@@ -23,6 +23,7 @@ import tspl.HPRTPrinterHelper;
  * and prints them using the HPRTPrinterHelper. Here we use
  * PortOpen to connect to a printer over Bluetooth.
  */
+
 public class FlutterPrinterPlugin implements FlutterPlugin, MethodCallHandler {
   private MethodChannel channel;
   private Context applicationContext;
@@ -41,12 +42,16 @@ public class FlutterPrinterPlugin implements FlutterPlugin, MethodCallHandler {
   }
 
   @Override
-  public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) throws Exception {
+  public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
     if (call.method.equals("printPDFList")) {
       ArrayList<byte[]> pdfBytesList = call.argument("pdfBytesList");
       if (pdfBytesList != null) {
-        printPDFList(pdfBytesList);
-        result.success("Printing started");
+          try {
+              printPDFList(pdfBytesList);
+          } catch (Exception e) {
+              throw new RuntimeException(e);
+          }
+          result.success("Printing started");
       } else {
         result.error("INVALID_ARGUMENT", "pdfBytesList is null", null);
       }
