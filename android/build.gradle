@@ -38,7 +38,7 @@ android {
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.20"
-        
+        implementation "flutter_embedding_debug-1.0.0-f73bfc4522dd0bc87bbcdb4bb3088082755c5e87.jar"
         implementation 'com.github.barteksc:pdfium-android:1.5.0'
         implementation("androidx.annotation:annotation:1.9.1")
         testImplementation("junit:junit:4.13.2")
